@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Team from '@/models/Team';
+import Match from '@/models/Match';
 
 export async function POST() {
   try {
@@ -24,8 +25,24 @@ export async function POST() {
     });
 
     await Promise.all(updates);
+    
+    // Clear matches since draw numbers changed
+    await Match.deleteMany({});
 
     return NextResponse.json({ success: true, message: 'Draw completed successfully' });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  }
+}
+
+export async function DELETE() {
+  try {
+    await dbConnect();
+    // Reset all team stats and draw numbers
+    await Team.updateMany({}, { drawNumber: null, wins: 0, losses: 0, points: 0 });
+    // Clear all matches
+    await Match.deleteMany({});
+    return NextResponse.json({ success: true, message: 'Draw reset successfully' });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 400 });
   }

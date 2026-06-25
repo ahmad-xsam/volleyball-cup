@@ -74,3 +74,47 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary); 
 }
+
+/* 3D Card Flip Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    border-color: rgba(59, 130, 246, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.8);
+    border-color: rgba(139, 92, 246, 0.9);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg) translate(0, 0); }
+  20% { transform: rotate(-1deg) translate(-2px, 1px); }
+  40% { transform: rotate(1deg) translate(1px, -1px); }
+  60% { transform: rotate(-1deg) translate(2px, 0); }
+  80% { transform: rotate(1deg) translate(-1px, 2px); }
+}
+
+.animate-shake {
+  animation: shake 0.3s infinite;
+}
+
