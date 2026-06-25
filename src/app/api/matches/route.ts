@@ -3,6 +3,8 @@ import dbConnect from '@/lib/mongodb';
 import Match from '@/models/Match';
 import Team from '@/models/Team';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     await dbConnect();
